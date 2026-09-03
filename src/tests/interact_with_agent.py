@@ -6,7 +6,7 @@ import os
 import sys
 from pathlib import Path
 from dotenv import load_dotenv
-from azure.identity import DefaultAzureCredential
+from azure.identity import AzureCliCredential
 from azure.ai.projects import AIProjectClient
 
 # Load environment variables from .env file
@@ -18,7 +18,7 @@ def interact_with_agent():
     # Initialize project client
     project_client = AIProjectClient(
         endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
-        credential=DefaultAzureCredential(),
+        credential=AzureCliCredential(),
     )
     
     # Get agent name from environment or use default
