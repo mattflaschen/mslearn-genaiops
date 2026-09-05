@@ -1,7 +1,7 @@
 import os
 import uuid
 from dotenv import load_dotenv
-from azure.identity import DefaultAzureCredential
+from azure.identity import AzureCliCredential
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import ConnectionType
 from azure.monitor.opentelemetry import configure_azure_monitor
@@ -25,7 +25,7 @@ os.environ['OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT'] = 'true'
 
 # Initialize the project
 project_client = AIProjectClient(            
-    credential=DefaultAzureCredential(
+    credential=AzureCliCredential(
         exclude_environment_credential=True,
         exclude_managed_identity_credential=True
     ),

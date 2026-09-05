@@ -14,7 +14,7 @@ import time
 import uuid
 from pathlib import Path
 from dotenv import load_dotenv
-from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from azure.identity import AzureCliCredential, get_bearer_token_provider
 from azure.ai.projects import AIProjectClient
 from openai import AzureOpenAI
 from azure.monitor.opentelemetry import configure_azure_monitor
@@ -31,7 +31,7 @@ model_name = os.getenv("MODEL_NAME", "gpt-5.1")
 # Connect to Azure AI Project and retrieve Application Insights connection string
 project_client = AIProjectClient(
     endpoint=project_endpoint,
-    credential=DefaultAzureCredential(),
+    credential=AzureCliCredential(),
 )
 connection_string = project_client.telemetry.get_application_insights_connection_string()
 print(f"[DEBUG] Connection string: {connection_string}")
@@ -45,7 +45,7 @@ OpenAIInstrumentor().instrument()
 tracer = trace.get_tracer(__name__)
 
 token_provider = get_bearer_token_provider(
-    DefaultAzureCredential(),
+    AzureCliCredential(),
     "https://cognitiveservices.azure.com/.default",
 )
 chat_client = AzureOpenAI(

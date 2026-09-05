@@ -8,7 +8,7 @@ Usage:
 """
 import os
 from dotenv import load_dotenv
-from azure.identity import DefaultAzureCredential
+from azure.identity import AzureCliCredential
 from azure.monitor.query import LogsQueryClient, LogsQueryStatus
 from azure.mgmt.applicationinsights import ApplicationInsightsManagementClient
 from azure.mgmt.subscription import SubscriptionClient
@@ -18,7 +18,7 @@ from datetime import timedelta
 
 load_dotenv()
 
-credential = DefaultAzureCredential()
+credential = AzureCliCredential()
 
 # Resolve the Application Insights connection string from the Foundry project
 project_endpoint = os.environ["AZURE_AI_PROJECT_ENDPOINT"]

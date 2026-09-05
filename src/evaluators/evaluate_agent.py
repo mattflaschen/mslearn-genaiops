@@ -15,7 +15,7 @@ import sys
 import time
 from pathlib import Path
 from dotenv import load_dotenv
-from azure.identity import DefaultAzureCredential
+from azure.identity import AzureCliCredential
 from azure.ai.projects import AIProjectClient
 from openai.types.eval_create_params import DataSourceConfigCustom
 from openai.types.evals.create_eval_jsonl_run_data_source_param import (
@@ -51,7 +51,7 @@ if not endpoint:
 # AIProjectClient connects to your Azure AI Foundry project
 project_client = AIProjectClient(
     endpoint=endpoint,
-    credential=DefaultAzureCredential(),
+    credential=AzureCliCredential(),
 )
 
 # The OpenAI-compatible client exposes the Evals API

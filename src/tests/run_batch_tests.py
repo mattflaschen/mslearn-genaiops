@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
-from azure.identity import DefaultAzureCredential
+from azure.identity import AzureCliCredential
 from azure.ai.projects import AIProjectClient
 
 # Load environment variables from .env file
@@ -49,7 +49,7 @@ def run_batch_tests(experiment_name):
     # Create project client
     client = AIProjectClient(
         endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
-        credential=DefaultAzureCredential(),
+        credential=AzureCliCredential(),
     )
 
     openai_client = client.get_openai_client()
